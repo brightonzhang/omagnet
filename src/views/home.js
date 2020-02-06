@@ -1,12 +1,35 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 
-const HomeScreen = () => {
-  return (
-    <View>
-      <Text>This is Home Screen</Text>
-    </View>
-  );
-};
+import { SearchBar } from "react-native-elements";
 
-export default HomeScreen;
+import FilterRules from "../components/FilterRules";
+
+class Home extends React.Component {
+  state = {
+    search: ""
+  };
+
+  updateSearch = search => {
+    this.setState({ search });
+  };
+
+  render() {
+    const { search } = this.state;
+
+    return (
+      <View>
+        <SearchBar
+          platform="android"
+          placeholder="Type Here..."
+          onChangeText={this.updateSearch}
+          value={search}
+        />
+
+        <FilterRules />
+      </View>
+    );
+  }
+}
+
+export default Home;

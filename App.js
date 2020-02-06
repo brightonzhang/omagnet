@@ -1,6 +1,13 @@
-import React from 'react';
-import AppContainer from './src/navigation/AppContainer';
+import React from "react";
+import { Provider } from "react-redux";
+
+import Store from "./src/store";
+import AppContainer from "./src/navigation/AppContainer";
 
 export default () => {
-  return <AppContainer />;
+  return (
+    <Provider store={Store}>
+      <AppContainer />
+    </Provider>
+  );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, Dimensions, SafeAreaView } from "react-native";
+import { View, Text, Image, Dimensions, SafeAreaView } from "react-native";
 import { createAppContainer } from "react-navigation";
 import {
   createDrawerNavigator,
@@ -29,6 +29,11 @@ const customContentComponent = props => (
         resizeMode="contain"
       />
     </View> */}
+
+    <View style={{ margin: 30 }}>
+      <Text>Omagnet</Text>
+    </View>
+
     <View style={{ marginLeft: 10 }}>
       <DrawerNavigatorItems {...props} />
     </View>

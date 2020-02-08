@@ -14,6 +14,10 @@ class Home extends React.Component {
     this.setState({ search });
   };
 
+  handleChangeRule = index => {
+    console.log(`handleChangeRule ${index}`);
+  };
+
   render() {
     const { search } = this.state;
 
@@ -26,7 +30,7 @@ class Home extends React.Component {
           value={search}
         />
 
-        <FilterRules />
+        <FilterRules onChange={this.handleChangeRule} />
       </View>
     );
   }

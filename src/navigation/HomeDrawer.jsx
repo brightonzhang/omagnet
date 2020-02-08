@@ -2,14 +2,14 @@ import React from "react";
 import { createStackNavigator } from "react-navigation-stack";
 import { Icon } from "react-native-elements";
 
-import Home from "../views/home";
+import HomeScreen from "../screens/HomeScreen";
 
 import config from "../config/stack";
 
 const HomeDrawerItem = createStackNavigator(
   {
     Home: {
-      screen: Home,
+      screen: HomeScreen,
 
       navigationOptions: ({ navigation }) => ({
         title: "Home",

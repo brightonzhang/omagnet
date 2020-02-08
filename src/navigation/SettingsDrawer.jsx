@@ -2,14 +2,14 @@ import React from "react";
 import { createStackNavigator } from "react-navigation-stack";
 import { Icon } from "react-native-elements";
 
-import Settings from "../views/settings";
+import SettingsScreen from "../screens/SettingsScreen";
 
 import config from "../config/stack";
 
 const SettingsDrawerItem = createStackNavigator(
   {
     Settings: {
-      screen: Settings,
+      screen: SettingsScreen,
       navigationOptions: ({ navigation }) => ({
         title: "Settings",
         headerStyle: {

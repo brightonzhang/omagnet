@@ -1,9 +1,12 @@
 import React from "react";
+import { connect } from 'react-redux'
+
 import { View } from "react-native";
 
 import { SearchBar } from "react-native-elements";
 
 import FilterRules from "../components/FilterRules";
+import actions from "../actions";
 
 class Home extends React.Component {
   state = {
@@ -16,6 +19,7 @@ class Home extends React.Component {
 
   handleChangeRule = index => {
     console.log(`handleChangeRule ${index}`);
+    this.searchMagnet({ rule: rules[index], keyword: "ip.man.4" });
   };
 
   render() {
@@ -36,4 +40,18 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => {
+  return {
+    rules: state.filterRules.data
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    searchMagnet: ({ rule, keyword }) => {
+      dispatch(actions.searchMagnet({ rule, keyword }));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

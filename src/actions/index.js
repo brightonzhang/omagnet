@@ -1,3 +1,4 @@
 import * as filterRulesActions from "./filterRules";
+import * as magnetsActions from "./magnets";
 
-export default { ...filterRulesActions };
+export default { ...filterRulesActions, ...magnetsActions };

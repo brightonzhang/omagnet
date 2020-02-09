@@ -12,12 +12,13 @@ export function fetchFilterRules() {
       dispatch({ type: FETCH_FILTER_RULES_REQUEST });
 
       //fetching
+      console.log("fetching...");
       const response = await fetch(magnetwConfig.ruleUrl);
+
+      console.log("response");
 
       //response
       const data = await response.json();
-
-      //   console.log(data);
 
       //dispatch end fetch action
       return dispatch({

@@ -10,7 +10,8 @@ import actions from "../actions";
 
 class Home extends React.Component {
   state = {
-    search: ""
+    search: "",
+    rules:[]
   };
 
   updateSearch = search => {
@@ -19,7 +20,9 @@ class Home extends React.Component {
 
   handleChangeRule = index => {
     console.log(`handleChangeRule ${index}`);
-    this.searchMagnet({ rule: rules[index], keyword: "ip.man.4" });
+    // console.log(this.props.rules);
+    
+    this.props.searchMagnet({ rule: this.props.rules[index], keyword: "ip.man.4" });
   };
 
   render() {

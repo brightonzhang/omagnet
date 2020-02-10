@@ -46,12 +46,10 @@ export function makeupSearchOption({
     rule.paths[newSort]
       .replace(/{k}/g, encodeURIComponent(keyword))
       .replace(/{p}/g, newPage);
-  return { id: rule.id, keyword, page: newPage, sort: newSort, url };
+  return { rule, keyword, url, page: newPage, sort: newSort };
 }
 
-async function requestDocument(url, clientHeaders) {
-  const timeout = 10000;
-
+async function requestDocument(url, clientHeaders = {}) {
   // header
   const uri = new URI(url);
   const host = uri.host();
@@ -69,22 +67,14 @@ async function requestDocument(url, clientHeaders) {
     headers["x-forwarded-for"] = xForwardedFor;
   }
   const userAgent = clientHeaders["user-agent"];
-  if (userAgent) {
-    const newUserAgent =
-      config.requestIdentifier &&
-      / windows | mac | android | ios /gi.test(userAgent) &&
-      process.env.npm_package_version
-        ? `${userAgent} MWBrowser/${process.env.npm_package_version}`
-        : userAgent;
-    headers["user-agent"] =
-      config.customUserAgent && config.customUserAgentValue
-        ? config.customUserAgentValue
-        : newUserAgent;
-  }
-  const options = { url: url, headers: headers, timeout: timeout };
+  headers["user-agent"] =
+    userAgent ||
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.130 Safari/537.36";
 
-  const html = await fetch(url, { headers });
-  console.log(html);
+  console.log({ url, headers });
+  const response = await fetch(url, { headers });
+  const html = await response.text();
+  // console.log('text: ',html);
 
   // 用htmlparser2转换一次再解析
   const outerHTML = htmlparser2.DomUtils.getOuterHTML(

@@ -11,26 +11,22 @@ export function fetchFilterRules() {
     try {
       dispatch({ type: FETCH_FILTER_RULES_REQUEST });
 
-      //fetching
-      console.log("fetching...");
       const response = await fetch(magnetwConfig.ruleUrl);
+      // console.log(JSON.stringify(response));
+      if (response.status === 200) {
+        const data = await response.json();
 
-      console.log("response");
+        return dispatch({
+          type: FETCH_FILTER_RULES_SUCCESS,
+          data
+        });
+      }
 
-      //response
-      const data = await response.json();
-
-      //dispatch end fetch action
-      return dispatch({
-        type: FETCH_FILTER_RULES_SUCCESS,
-        data
-      });
+      throw new Error(`status: ${response.status}`);
     } catch (error) {
-      console.error(error);
-
       return dispatch({
         type: FETCH_FILTER_RULES_FAILURE,
-        error
+        error: error.toString()
       });
     }
   };

@@ -4,9 +4,12 @@ import {
   FETCH_FILTER_RULES_FAILURE
 } from "../constants/actionTypes";
 
+import defaultRules from "../../assets/data/rules.json";
+
 const initialState = {
   isFetching: false,
-  data: []
+  data: defaultRules,
+  error: ""
 };
 
 export default function filterRules(state = initialState, action) {
@@ -18,7 +21,7 @@ export default function filterRules(state = initialState, action) {
       return { ...state, isFetching: false, data: action.data };
 
     case FETCH_FILTER_RULES_FAILURE:
-      return { ...state, isFetching: false };
+      return { ...state, isFetching: false, error: action.error };
 
     default:
       return state;

@@ -7,7 +7,7 @@ import reducers from "../reducers";
 const logger = createLogger({
   level: "log" // 'log' | 'console' | 'warn' | 'error' | 'info', // console's level
 });
-const middlewares = compose(applyMiddleware(thunk,  ));
+const middlewares = compose(applyMiddleware(thunk,  logger));
 const store = createStore(reducers, middlewares);
 
 export default store;

@@ -8,7 +8,7 @@ import defaultRules from "../../assets/data/rules.json";
 
 const initialState = {
   isFetching: false,
-  data: defaultRules,
+  data: defaultRules.filter(it => !it.proxy),
   error: ""
 };
 
@@ -18,7 +18,11 @@ export default function filterRules(state = initialState, action) {
       return { ...state, isFetching: true };
 
     case FETCH_FILTER_RULES_SUCCESS:
-      return { ...state, isFetching: false, data: action.data };
+      return {
+        ...state,
+        isFetching: false,
+        data: action.data.filter(it => !it.proxy)
+      };
 
     case FETCH_FILTER_RULES_FAILURE:
       return { ...state, isFetching: false, error: action.error };

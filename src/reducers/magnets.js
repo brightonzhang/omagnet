@@ -9,10 +9,10 @@ const initialState = {
   data: []
 };
 
-export default function filterRules(state = initialState, action) {
+export default function magnets(state = initialState, action) {
   switch (action.type) {
     case SEARCH_MAGNETS_REQUEST:
-      return { ...state, loading: true };
+      return { ...state, loading: true, data: [] };
 
     case SEARCH_MAGNETS_SUCCESS:
       return { ...state, loading: false, data: action.data };

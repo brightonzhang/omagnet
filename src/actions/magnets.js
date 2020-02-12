@@ -14,12 +14,10 @@ export function searchMagnet({ rule, keyword }) {
     try {
       dispatch({ type: SEARCH_MAGNETS_REQUEST });
 
-      console.log({ rule, keyword });
+      // console.log({ rule, keyword });
 
       const current = makeupSearchOption({ rule, keyword });
       const { originalCount, items } = await obtainSearchResult(current);
-
-      console.log(items);
 
       return dispatch({
         type: SEARCH_MAGNETS_SUCCESS,

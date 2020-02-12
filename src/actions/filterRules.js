@@ -24,6 +24,7 @@ export function fetchFilterRules() {
 
       throw new Error(`status: ${response.status}`);
     } catch (error) {
+      console.log(error.toString());
       return dispatch({
         type: FETCH_FILTER_RULES_FAILURE,
         error: error.toString()

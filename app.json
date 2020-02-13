@@ -4,7 +4,11 @@
     "slug": "omagnet",
     "privacy": "public",
     "sdkVersion": "36.0.0",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
     "githubUrl": "https://github.com/brightonzhang/omagnet",
     "orientation": "portrait",
@@ -17,7 +21,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.brightonzhang.omagnet",
@@ -27,6 +33,7 @@
       "package": "com.brightonzhang.omagnet",
       "versionCode": 1,
       "permissions": []
-    }
+    },
+    "description": "a magnet search engine aggregator"
   }
 }

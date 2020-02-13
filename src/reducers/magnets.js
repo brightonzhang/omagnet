@@ -18,7 +18,7 @@ export default function magnets(state = initialState, action) {
       return { ...state, loading: false, data: action.data };
 
     case SEARCH_MAGNETS_FAILURE:
-      return { ...state, loading: false };
+      return { ...state, loading: false, data: [] };
 
     default:
       return state;

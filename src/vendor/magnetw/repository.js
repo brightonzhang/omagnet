@@ -71,7 +71,7 @@ async function requestDocument(url, clientHeaders = {}) {
     userAgent ||
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.130 Safari/537.36";
 
-  console.log({ url, headers });
+  // console.log({ url, headers });
   const response = await fetch(url, { headers });
   const html = await response.text();
   // console.log('text: ',html);

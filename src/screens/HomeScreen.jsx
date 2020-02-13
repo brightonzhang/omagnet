@@ -20,21 +20,24 @@ class Home extends React.Component {
     this.setState({ search });
   };
 
-  submitSearch = () => {
-    const keyword = this.state.search;
+  submitSearch = (keyword, activeRule) => {
     console.log(`submitSearch ${keyword}`);
     if (keyword) {
       this.props.searchMagnet({
         keyword,
-        rule: this.props.rules[this.state.activeRule]
+        rule: this.props.rules[activeRule]
       });
     }
+  };
+
+  handleEndEditing = e => {
+    this.submitSearch(e.nativeEvent.text, this.state.activeRule);
   };
 
   handleChangeRule = index => {
     console.log(`handleChangeRule ${index}`);
     this.setState({ activeRule: index });
-    this.submitSearch();
+    this.submitSearch(this.state.search, index);
   };
 
   render() {
@@ -54,7 +57,7 @@ class Home extends React.Component {
           platform="android"
           placeholder="请输入想要搜索的文件名"
           onChangeText={this.updateSearch}
-          onEndEditing={this.submitSearch}
+          onEndEditing={this.handleEndEditing}
           value={search}
         />
         <View>

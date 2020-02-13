@@ -12,7 +12,7 @@ const HomeDrawerItem = createStackNavigator(
       screen: HomeScreen,
 
       navigationOptions: ({ navigation }) => ({
-        title: "Home",
+        title: "Omagnet",
         headerLeft: () => (
           <Icon
             name="menu"

@@ -14,8 +14,7 @@ export function searchMagnet({ rule, keyword }) {
     try {
       dispatch({ type: SEARCH_MAGNETS_REQUEST });
 
-      // console.log({ rule, keyword });
-
+      console.log({ name: rule.name, keyword });
       const current = makeupSearchOption({ rule, keyword });
       const { originalCount, items } = await obtainSearchResult(current);
 

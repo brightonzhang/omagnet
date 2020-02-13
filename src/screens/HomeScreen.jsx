@@ -1,14 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { ActivityIndicator, ScrollView, View } from "react-native";
+import { ActivityIndicator, ScrollView, Text, View } from "react-native";
 
 import { SearchBar } from "react-native-elements";
 
 import FilterRules from "../components/FilterRules";
 import MagnetBrief from "../components/MagnetBrief";
 import actions from "../actions";
-import log from "../utils/log";
+import {
+  SEARCH_INIT,
+  SEARCH_REQUEST,
+  SEARCH_SUCCESS,
+  SEARCH_FAILURE
+} from "../constants/searchStatus";
 
 class Home extends React.Component {
   state = {
@@ -43,13 +48,42 @@ class Home extends React.Component {
   render() {
     const { search } = this.state;
 
-    let magnets = this.props.loading ? (
-      <ActivityIndicator size="large" />
-    ) : (
-      this.props.magnets.map((magnet, index) => (
-        <MagnetBrief info={magnet} key={index} />
-      ))
-    );
+    let magnets;
+    switch (this.props.magnets.status) {
+      case SEARCH_REQUEST:
+        magnets = <ActivityIndicator size="large" />;
+        break;
+
+      case SEARCH_SUCCESS: {
+        let list = null;
+        let total = 0;
+        const data = this.props.magnets[
+          this.props.rules[this.state.activeRule].id
+        ];
+        if (data) {
+          total = data.length;
+          list = data.map((magnet, index) => (
+            <MagnetBrief info={magnet} key={index} />
+          ));
+        }
+
+        magnets = (
+          <ScrollView style={{ flex: 1 }}>
+            <Text>{`共搜索到${total}条记录`}</Text>
+            {list}
+          </ScrollView>
+        );
+        break;
+      }
+
+      case SEARCH_FAILURE:
+        magnets = <Text>出错了。。。</Text>;
+        break;
+
+      default:
+        magnets = null;
+        break;
+    }
 
     return (
       <View style={{ flex: 1 }}>
@@ -63,7 +97,7 @@ class Home extends React.Component {
         <View>
           <FilterRules onChange={this.handleChangeRule} />
         </View>
-        <ScrollView style={{ flex: 1 }}>{magnets}</ScrollView>
+        {magnets}
       </View>
     );
   }
@@ -72,8 +106,7 @@ class Home extends React.Component {
 const mapStateToProps = state => {
   return {
     rules: state.filterRules.data,
-    magnets: state.magnets.data,
-    loading: state.magnets.loading
+    magnets: state.magnets
   };
 };
 

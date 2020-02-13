@@ -12,7 +12,7 @@ import {
 export function searchMagnet({ rule, keyword }) {
   return async (dispatch, getState) => {
     try {
-      dispatch({ type: SEARCH_MAGNETS_REQUEST });
+      dispatch({ type: SEARCH_MAGNETS_REQUEST, id: rule.id });
 
       console.log({ name: rule.name, keyword });
       const current = makeupSearchOption({ rule, keyword });
@@ -20,14 +20,16 @@ export function searchMagnet({ rule, keyword }) {
 
       return dispatch({
         type: SEARCH_MAGNETS_SUCCESS,
+        id: rule.id,
         data: items
       });
     } catch (error) {
-      console.error(error);
+      console.log(error.toString());
 
       return dispatch({
         type: SEARCH_MAGNETS_FAILURE,
-        error
+        id: rule.id,
+        error: error.toString()
       });
     }
   };

@@ -14,6 +14,10 @@ if (log.getLevel() <= log.levels.DEBUG) {
   middlewares.push(logger);
 }
 
-const store = createStore(reducers, compose(applyMiddleware(...middlewares)));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  reducers,
+  composeEnhancers(applyMiddleware(...middlewares))
+);
 
 export default store;
